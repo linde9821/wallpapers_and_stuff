@@ -14,7 +14,7 @@ kotlinLogging = "8.0.4"
 kotlinCsvJvm = "1.10.0"
 jsoup = "1.22.2"
 shadow = "9.4.2"
-runtime = "1.13.1"
+runtime = "2.0.1"
 versions = "0.54.0"
 
 [libraries]
