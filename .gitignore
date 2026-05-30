@@ -1,0 +1,13 @@
+application.log
+build
+out
+.idea
+.gradle
+.kotlin
+.lwjgl
+video/
+screenshots/
+gui-parameters/
+ffmpegOutput.txt
+ShaderError.glsl
+
