@@ -10,30 +10,31 @@ version = "1.0.0"
 val applicationMainClass = "TemplateProgramKt"
 
 /**  ## additional ORX features to be added to this project */
-val orxFeatures = setOf<String>(
+val orxFeatures =
+    setOf<String>(
 //  "orx-axidraw",
 //  "orx-boofcv",
-    "orx-camera",
+        "orx-camera",
 //  "orx-chataigne",
-    "orx-color",
-    "orx-composition",
-    "orx-compositor",
+        "orx-color",
+        "orx-composition",
+        "orx-compositor",
 //  "orx-compute-graph",
 //  "orx-compute-graph-nodes",
-    "orx-delegate-magic",
+        "orx-delegate-magic",
 //  "orx-dnk3",
 //  "orx-easing",
-    "orx-envelopes",
+        "orx-envelopes",
 //  "orx-expression-evaluator",
 //  "orx-fcurve",
 //  "orx-fft",
 //  "orx-file-watcher",
-    "orx-fx",
+        "orx-fx",
 //  "orx-git-archiver",
 //  "orx-gradient-descent",
-    "orx-gui",
+        "orx-gui",
 //  "orx-hash-grid",
-    "orx-image-fit",
+        "orx-image-fit",
 //  "orx-integral-image",
 //  "orx-interval-tree",
 //  "orx-jumpflood",
@@ -46,13 +47,13 @@ val orxFeatures = setOf<String>(
 //  "orx-mesh-generators",
 //  "orx-midi",
 //  "orx-minim",
-    "orx-no-clear",
-    "orx-noise",
+        "orx-no-clear",
+        "orx-noise",
 //  "orx-obj-loader",
-    "orx-olive",
+        "orx-olive",
 //  "orx-osc",
 //  "orx-palette",
-    "orx-panel",
+        "orx-panel",
 //  "orx-parameters",
 //  "orx-poisson-fill",
 //  "orx-property-watchers",
@@ -60,24 +61,25 @@ val orxFeatures = setOf<String>(
 //  "orx-rabbit-control",
 //  "orx-realsense2",
 //  "orx-runway",
-    "orx-shade-styles",
+        "orx-shade-styles",
 //  "orx-shader-phrases",
-    "orx-shapes",
-    "orx-svg",
+        "orx-shapes",
+        "orx-svg",
 //  "orx-syphon",
 //  "orx-temporal-blur",
 //  "orx-tensorflow",
-    "orx-text-writer",
+        "orx-text-writer",
 //  "orx-time-operators",
 //  "orx-timer",
 //  "orx-triangulation",
 //  "orx-turtle",
-    "orx-video-profiles",
-    "orx-view-box",
-)
+        "orx-video-profiles",
+        "orx-view-box",
+    )
 
 /** ## additional ORML features to be added to this project */
-val ormlFeatures = setOf<String>(
+val ormlFeatures =
+    setOf<String>(
 //    "orml-blazepose",
 //    "orml-dbface",
 //    "orml-facemesh",
@@ -87,12 +89,13 @@ val ormlFeatures = setOf<String>(
 //    "orml-style-transfer",
 //    "orml-super-resolution",
 //    "orml-u2net",
-)
+    )
 
 /** ## additional OPENRNDR features to be added to this project */
-val openrndrFeatures = setOfNotNull(
-    if (DefaultNativePlatform("current").architecture.name != "arm-v8") "video" else null
-)
+val openrndrFeatures =
+    setOfNotNull(
+        if (DefaultNativePlatform("current").architecture.name != "arm-v8") "video" else null,
+    )
 
 /** ## configure the type of logging this project uses */
 enum class Logging { NONE, SIMPLE, FULL }
@@ -122,7 +125,7 @@ dependencies {
 //    implementation(libs.jsoup)
 //    implementation(libs.csv)
 
-    /* ORSL dependencies */
+    // ORSL dependencies
 
 //    implementation(libs.orsl.shader.generator)
 //    implementation(libs.orsl.extension.color)
@@ -140,8 +143,14 @@ dependencies {
     implementation(libs.kotlin.logging)
 
     when (applicationLogging) {
-        Logging.NONE -> runtimeOnly(libs.slf4j.nop)
-        Logging.SIMPLE -> runtimeOnly(libs.slf4j.simple)
+        Logging.NONE -> {
+            runtimeOnly(libs.slf4j.nop)
+        }
+
+        Logging.SIMPLE -> {
+            runtimeOnly(libs.slf4j.simple)
+        }
+
         Logging.FULL -> {
             runtimeOnly(libs.log4j.slf4j2)
             runtimeOnly(libs.log4j.core)
@@ -156,24 +165,28 @@ dependencies {
 // ------------------------------------------------------------------------------------------------------------------ //
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_25
+    targetCompatibility = JavaVersion.VERSION_25
 }
 kotlin {
     compilerOptions {
-        languageVersion = KotlinVersion.KOTLIN_2_0
-        apiVersion = KotlinVersion.KOTLIN_2_0
-        jvmTarget = JvmTarget.JVM_17
+        languageVersion = KotlinVersion.KOTLIN_2_3
+        apiVersion = KotlinVersion.KOTLIN_2_3
+        jvmTarget = JvmTarget.JVM_25
     }
 }
 
 // ------------------------------------------------------------------------------------------------------------------ //
 
 application {
-    mainClass = if (hasProperty("openrndr.application"))
-        "${property("openrndr.application")}"
-    else
-        applicationMainClass
+    mainClass =
+        if (hasProperty("openrndr.application")) {
+            "${property("openrndr.application")}"
+        } else {
+            applicationMainClass
+        }
+
+    applicationDefaultJvmArgs = listOf("--enable-native-access=ALL-UNNAMED")
 }
 
 tasks {
@@ -199,10 +212,12 @@ tasks {
 tasks {
     named<org.beryx.runtime.JPackageTask>("jpackage") {
         doLast {
-            val destPath = if (OperatingSystem.current().isMacOsX)
-                "build/jpackage/openrndr-application.app/Contents/Resources/data"
-            else
-                "build/jpackage/openrndr-application/data"
+            val destPath =
+                if (OperatingSystem.current().isMacOsX) {
+                    "build/jpackage/openrndr-application.app/Contents/Resources/data"
+                } else {
+                    "build/jpackage/openrndr-application/data"
+                }
 
             copy {
                 from("data") { include("**/*") }
@@ -249,9 +264,10 @@ tasks {
 
         val nonStableKeywords = listOf("alpha", "beta", "rc")
 
-        fun isNonStable(version: String) = nonStableKeywords.any {
-            version.lowercase().contains(it)
-        }
+        fun isNonStable(version: String) =
+            nonStableKeywords.any {
+                version.lowercase().contains(it)
+            }
 
         rejectVersionIf {
             isNonStable(candidate.version) && !isNonStable(currentVersion)
@@ -271,34 +287,50 @@ class Openrndr {
 
     val currArch = DefaultNativePlatform("current").architecture.name
     val currOs = OperatingSystem.current()
-    val os = if (project.hasProperty("targetPlatform")) {
-        val supportedPlatforms = setOf("windows", "macos", "linux-x64", "linux-arm64")
-        val platform: String = project.property("targetPlatform") as String
-        if (platform !in supportedPlatforms) {
-            throw IllegalArgumentException("target platform not supported: $platform")
+    val os =
+        if (project.hasProperty("targetPlatform")) {
+            val supportedPlatforms = setOf("windows", "macos", "linux-x64", "linux-arm64")
+            val platform: String = project.property("targetPlatform") as String
+            if (platform !in supportedPlatforms) {
+                throw IllegalArgumentException("target platform not supported: $platform")
+            } else {
+                platform
+            }
         } else {
-            platform
-        }
-    } else when {
-        currOs.isWindows -> "windows"
-        currOs.isMacOsX -> when (currArch) {
-            "aarch64", "arm-v8" -> "macos-arm64"
-            else -> "macos"
-        }
+            when {
+                currOs.isWindows -> {
+                    "windows"
+                }
 
-        currOs.isLinux -> when (currArch) {
-            "x86-64" -> "linux-x64"
-            "aarch64" -> "linux-arm64"
-            else -> throw IllegalArgumentException("architecture not supported: $currArch")
-        }
+                currOs.isMacOsX -> {
+                    when (currArch) {
+                        "aarch64", "arm-v8" -> "macos-arm64"
+                        else -> "macos"
+                    }
+                }
 
-        else -> throw IllegalArgumentException("os not supported: ${currOs.name}")
-    }
+                currOs.isLinux -> {
+                    when (currArch) {
+                        "x86-64" -> "linux-x64"
+                        "aarch64" -> "linux-arm64"
+                        else -> throw IllegalArgumentException("architecture not supported: $currArch")
+                    }
+                }
+
+                else -> {
+                    throw IllegalArgumentException("os not supported: ${currOs.name}")
+                }
+            }
+        }
 
     fun orx(module: String) = "org.openrndr.extra:$module:$orxVersion"
+
     fun orml(module: String) = "org.openrndr.orml:$module:$ormlVersion"
+
     fun openrndr(module: String) = "org.openrndr:openrndr-$module:$openrndrVersion"
+
     fun openrndrNatives(module: String) = "org.openrndr:openrndr-$module-natives-$os:$openrndrVersion"
+
     fun orxNatives(module: String) = "org.openrndr.extra:$module-natives-$os:$orxVersion"
 
     init {
@@ -352,12 +384,13 @@ if (properties["openrndr.tasks"] == "true") {
         val scopesFolder = File("${project.projectDir}/.idea/scopes")
         scopesFolder.mkdirs()
 
-        val files = listOf(
-            "Code" to "file:*.kt||file:*.frag||file:*.vert||file:*.glsl",
-            "Text" to "file:*.txt||file:*.md||file:*.xml||file:*.json",
-            "Gradle" to "file[*buildSrc*]:*/||file:*gradle.*||file:*.gradle||file:*/gradle-wrapper.properties||file:*.toml",
-            "Media" to "file:*.png||file:*.jpg||file:*.dds||file:*.exr||file:*.mp3||file:*.wav||file:*.mp4||file:*.mov||file:*.svg"
-        )
+        val files =
+            listOf(
+                "Code" to "file:*.kt||file:*.frag||file:*.vert||file:*.glsl",
+                "Text" to "file:*.txt||file:*.md||file:*.xml||file:*.json",
+                "Gradle" to "file[*buildSrc*]:*/||file:*gradle.*||file:*.gradle||file:*/gradle-wrapper.properties||file:*.toml",
+                "Media" to "file:*.png||file:*.jpg||file:*.dds||file:*.exr||file:*.mp3||file:*.wav||file:*.mp4||file:*.mov||file:*.svg",
+            )
         files.forEach { (name, pattern) ->
             val file = File(scopesFolder, "__$name.xml")
             if (!file.exists()) {
@@ -366,7 +399,7 @@ if (properties["openrndr.tasks"] == "true") {
                     <component name="DependencyValidationManager">
                       <scope name=" ★ $name" pattern="$pattern" />
                     </component>
-                    """.trimIndent()
+                    """.trimIndent(),
                 )
             }
         }
