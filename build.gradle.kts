@@ -42,7 +42,7 @@ val orxFeatures =
 //  "orx-keyframer",
 //  "orx-kinect-v1",
 //  "orx-kotlin-parser",
-//  "orx-marching-squares",
+        "orx-marching-squares",
 //  "orx-math",
 //  "orx-mesh-generators",
 //  "orx-midi",
