@@ -13,9 +13,9 @@ kotlinxSerialization = "1.11.0"
 kotlinLogging = "8.0.4"
 kotlinCsvJvm = "1.10.0"
 jsoup = "1.22.2"
-shadow = "9.6.0"
+shadow = "9.6.1"
 runtime = "2.0.1"
-versions = "0.54.0"
+versions = "0.56.0"
 
 [libraries]
 kotlin-script-runtime = { group = "org.jetbrains.kotlin", name = "kotlin-script-runtime", version.ref = "kotlin" }
