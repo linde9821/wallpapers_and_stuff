@@ -1,21 +1,21 @@
 [versions]
-kotlin = "2.4.10"
+kotlin = "2.4.20"
 openrndr = "0.4.5"
-orx = "0.4.5"
+orx = "0.5.0"
 orsl = "0.4.5-alpha5"
 orml = "0.4.1"
-slf4j = "2.0.18"
+slf4j = "2.0.19"
 log4j = "2.26.1"
-jackson = "2.22.1"
+jackson = "2.22.2"
 junit = "4.13.2"
 kotlinxCoroutines = "1.11.0"
 kotlinxSerialization = "1.11.0"
 kotlinLogging = "8.0.4"
 kotlinCsvJvm = "1.10.0"
-jsoup = "1.22.2"
-shadow = "9.6.0"
+jsoup = "1.23.2"
+shadow = "9.6.1"
 runtime = "2.0.1"
-versions = "0.54.0"
+versions = "0.63.1"
 
 [libraries]
 kotlin-script-runtime = { group = "org.jetbrains.kotlin", name = "kotlin-script-runtime", version.ref = "kotlin" }
